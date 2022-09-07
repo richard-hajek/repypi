@@ -5,3 +5,5 @@ __pycache__
 venv
 dist/*
 !dist/.gitkeep
+.vscode
+build

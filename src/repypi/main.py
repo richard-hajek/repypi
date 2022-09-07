@@ -10,29 +10,37 @@ import argparse
 import os.path as osp
 import os
 import requirements
+import json
+from natsort import natsorted
 
 def get_history(project: str):
-    url = f"https://pypi.org/rss/project/{project}/releases.xml"
+    url = f"https://pypi.org/pypi/{project}/json"
     response = requests.get(url)
 
     if response.status_code != 200:
         return None
 
-    data = xmltodict.parse(response.content)
+    data = json.loads(response.content)
     return data
 
 def find_version_at(d: datetime.date, history: dict) -> str:
     
     latest_valid_ver = None
 
-    if type(history) == dict:
-        history = [history]
+    history_sorted = natsorted(history)
 
-    for version in reversed(history):
-        version_uploaded_at = datetime.strptime(version["pubDate"], "%a, %d %b %Y %X %Z")
+    for version_name in history_sorted:
+
+        versions_published = history[version_name]
+
+        if len(versions_published) == 0:
+            continue
+        
+        version = versions_published[0]
+        version_uploaded_at = dateutil.parser.parse(version["upload_time"])
 
         if d > version_uploaded_at:
-            latest_valid_ver = version["title"]
+            latest_valid_ver = version_name
 
     return latest_valid_ver
 
@@ -49,7 +57,7 @@ def find_versions_at(d: datetime.date, packages: List[str]) -> List[Tuple[str, s
             print(f"Could not find package '{package}' on PyPI", file=sys.stderr)
             continue
         
-        history = history["rss"]["channel"]["item"]
+        history = history["releases"]
         
         newest_version_at_d = find_version_at(d, history)
 
