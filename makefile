@@ -1,6 +1,13 @@
 # You may or may not use this file, it is a shorthand
 .PHONY: build
 
+update:
+	git push
+	rm dist/*
+	rm -r src/*egg*
+	venv/bin/python3 -m build
+	venv/bin/python3 -m twine upload --repository pypi dist/*
+
 build: 
 	venv/bin/python3 -m build
 
