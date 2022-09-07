@@ -1,17 +1,18 @@
-import xml.etree.ElementTree as ET
-import requests
-import xmltodict
-from pprint import pprint
-from datetime import datetime
-from typing import List, Tuple
-import sys
-import dateutil.parser
 import argparse
-import os.path as osp
-import os
-import requirements
 import json
+import os
+import os.path as osp
+import sys
+import xml.etree.ElementTree as ET
+from datetime import datetime
+from pprint import pprint
+from typing import List, Tuple
+
+import dateutil.parser
+import requests
+import requirements
 from natsort import natsorted
+
 
 def get_history(project: str):
     url = f"https://pypi.org/pypi/{project}/json"
