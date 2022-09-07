@@ -2,6 +2,10 @@
 
 Imagine, you just got hired to fix a legacy Python project. But the previous project maintainer did not bother to add versions to requirements.txt. If you know when was that project made, you can use `repypi` to populate `requirements.txt` with what was newest at the time! `repypi` will not touch any requirement lines that it fails to parse or that already have a version spec.
 
+## Install
+
+You may install using `pip install repypi` or `pipx install repypi`
+
 ## Usage
 
 Example `requirements.txt`
@@ -18,6 +22,8 @@ RePyPI can modify requirements.txt to contain newest packages on 01/01/2018
 ```bash
 repypi -r requirements.txt -d "01/01/2018" 
 ```
+
+With the resulting file being:
 
 ```
 # This is a comment
