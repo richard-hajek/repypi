@@ -1,6 +1,7 @@
 # You may or may not use this file, it is a shorthand
+.PHONY: build
 
-build:
+build: 
 	venv/bin/python3 -m build
 
 deploy:

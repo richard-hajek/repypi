@@ -12,7 +12,8 @@ Imagine, you just got hired to fix a legacy Python project. But the previous pro
 # tensorflow
 # pandas
 
-repypi -r requirements.txt -d "01/01/2018"
+ # Modify requirements.txt to contain newest packages on 01/01/2018
+repypi -r requirements.txt -d "01/01/2018" 
 
 # requirements.txt will now contain
 # This is a comment
