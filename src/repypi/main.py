@@ -3,7 +3,6 @@ import json
 import os
 import os.path as osp
 import sys
-import xml.etree.ElementTree as ET
 from datetime import datetime
 from pprint import pprint
 from typing import List, Tuple
